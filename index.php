@@ -76,6 +76,12 @@ echo '<pre>';
 //     echo "\n";
 // }
 
+$conn = $entityManager->getConnection();
+
+$stmt = $conn->query('select * from products');
+
+var_dump($stmt->getArrayResult());
+
 $bugs = $entityManager->getRepository('Entities\Bug')->getRecentBugs();
 
 foreach ($bugs as $bug) {
