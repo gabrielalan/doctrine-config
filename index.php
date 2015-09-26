@@ -7,6 +7,8 @@ use Entities\Product;
 use Entities\Bug;
 use Entities\User;
 
+echo '<pre>';
+
 // $product = new Product();
 // $product->setName('DBAL');
 
@@ -58,13 +60,13 @@ use Entities\User;
 
 // echo "Your new Bug Id: ".$bug->getId()."\n";
 
-// $dql = "SELECT b, e, r FROM Entities\Bug b JOIN b.engineer e JOIN b.reporter r ORDER BY b.created DESC";
+$dql = "SELECT partial b.{id,description}, e, r FROM Entities\Bug b JOIN b.engineer e JOIN b.reporter r ORDER BY b.created DESC";
 
-// $query = $entityManager->createQuery($dql);
-// $query->setMaxResults(30);
-// $bugs = $query->getResult();
+$query = $entityManager->createQuery($dql);
+$query->setMaxResults(30);
+$bugs = $query->getArrayResult();
 
-echo '<pre>';
+echo (json_encode($bugs));
 
 // foreach ($bugs as $bug) {
 //     echo $bug->getDescription()." - ".$bug->getCreated()->format('d.m.Y')."\n";
@@ -76,20 +78,20 @@ echo '<pre>';
 //     echo "\n";
 // }
 
-$conn = $entityManager->getConnection();
+// $conn = $entityManager->getConnection();
 
-$stmt = $conn->query('select * from products');
+// $stmt = $conn->query('select * from products');
 
-var_dump($stmt->getArrayResult());
+// var_dump($stmt->getArrayResult());
 
-$bugs = $entityManager->getRepository('Entities\Bug')->getRecentBugs();
+// $bugs = $entityManager->getRepository('Entities\Bug')->getRecentBugs();
 
-foreach ($bugs as $bug) {
-    echo $bug->getDescription()." - ".$bug->getCreated()->format('d.m.Y')."\n";
-    echo "    Reported by: ".$bug->getReporter()->getName()."\n";
-    echo "    Assigned to: ".$bug->getEngineer()->getName()."\n";
-    foreach ($bug->getProducts() as $product) {
-        echo "    Platform: ".$product->getName()."\n";
-    }
-    echo "\n";
-}
+// foreach ($bugs as $bug) {
+//     echo $bug->getDescription()." - ".$bug->getCreated()->format('d.m.Y')."\n";
+//     echo "    Reported by: ".$bug->getReporter()->getName()."\n";
+//     echo "    Assigned to: ".$bug->getEngineer()->getName()."\n";
+//     foreach ($bug->getProducts() as $product) {
+//         echo "    Platform: ".$product->getName()."\n";
+//     }
+//     echo "\n";
+// }
