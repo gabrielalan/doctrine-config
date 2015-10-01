@@ -17,6 +17,10 @@ class Product
      * @Column(type="string")
      */
     protected $name;
+    /**
+     * @Column(type="text")
+     */
+    protected $description;
 
     public function getId()
     {
