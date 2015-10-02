@@ -6,14 +6,17 @@ use Doctrine\Common\Collections\ArrayCollection;
 
 use Repositories\BugRepository;
 
+//(repositoryClass="Repositories\BugRepository")
+
 /**
- * @Entity(repositoryClass="Repositories\BugRepository") 
+ * @Entity
  * @Table(name="bugs")
  */
-class Bug
+class Bug extends Entity
 {
     /**
-     * @Id @Column(type="integer") @GeneratedValue
+     * @Id @Column(type="integer")
+	 * @GeneratedValue
      * @var int
      */
     protected $id;

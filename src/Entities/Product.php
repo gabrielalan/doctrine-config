@@ -6,7 +6,7 @@ namespace Entities;
  * @Entity 
  * @Table(name="products")
  */
-class Product
+class Product extends Entity
 {
     /**
      * @Id @Column(type="integer") 
@@ -18,7 +18,7 @@ class Product
      */
     protected $name;
     /**
-     * @Column(type="text")
+     * @Column(type="text", nullable=true)
      */
     protected $description;
 

@@ -5,9 +5,10 @@ namespace Entities;
 use Doctrine\Common\Collections\ArrayCollection;
 
 /**
- * @Entity @Table(name="users")
+ * @Entity
+ * @Table(name="users")
  */
-class User
+class User extends Entity
 {
     /**
      * @Id @GeneratedValue @Column(type="integer")
