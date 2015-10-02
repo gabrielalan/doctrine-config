@@ -10,7 +10,7 @@ use Entities\User;
 echo '<pre>';
 
 
-$json = json_decode('{"id":7, "description":"Descasdasdasdasd", "created":1443739261255, "status":"OPEN", "products":[{"id":1, "remove":true}, {"id":2}], "engineer":2, "reporter":3}');
+$json = json_decode('{"id":14, "description":"Descasdasdasdasd", "created":1443739261255, "status":"OPEN", "products":[{"id":1, "remove":true}, {"id":2}, {"id":3}], "engineer":2, "reporter":3}');
 
 try {
 	$metadata = $entityManager->getClassMetadata('Entities\Bug');
@@ -77,23 +77,14 @@ try {
 				$ids = array();
 
 				foreach( $entities as $entityData ) {
-					$ids[] = $entityData->id;
+					if( !isset($entityData->remove) )
+						$ids[] = $entityData->id;
 				}
 
 				$finder = $entityManager->getRepository($assoc['targetEntity'])->findBy(array('id' => $ids));
 
-				$collection = $instance->get($assoc['fieldName']);
-
-				foreach( $finder as $finded ) {
-					if( !$collection->contains($finded) /*&& !$remove*/ )
-						$collection->add($finded);
-//					else if( $remove )
-//						$collection->removeElement($finded);
-
-					var_dump($remove);
-				}
-//				var_dump(get_class_methods($collection));
-//				var_dump($json->{$assoc['fieldName']});
+				$collection = new \Doctrine\Common\Collections\ArrayCollection($finder);
+				$instance->set($assoc['fieldName'], $collection);
 				break;
 		}
 	}
