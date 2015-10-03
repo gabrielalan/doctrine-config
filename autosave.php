@@ -10,7 +10,7 @@ use Entities\User;
 echo '<pre>';
 
 
-$json = json_decode('{"id":14, "description":"Descasdasdasdasd", "created":1443739261255, "status":"OPEN", "products":[{"id":1, "remove":true}, {"id":2}, {"id":3}], "engineer":2, "reporter":3}');
+$json = json_decode('{"id":14, "description":"Descasdasdasdasd", "created":1443739261255, "status":"OPEN", "products":[{"id":1}, {"id":2}, {"id":3}], "engineer":2, "reporter":3}');
 
 try {
 	$metadata = $entityManager->getClassMetadata('Entities\Bug');
