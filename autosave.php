@@ -1,6 +1,5 @@
 <?php
 
-// replace with file to your own project bootstrap
 require_once 'bootstrap.php';
 
 use Entities\Product;
@@ -71,8 +70,9 @@ try {
 			case Doctrine\ORM\Mapping\ClassMetadataInfo::MANY_TO_MANY:
 				$entities = $json->{$assoc['fieldName']};
 
-				if( !is_array($entities) )
+				if( !is_array($entities) ) {
 					continue;
+				}
 
 				$ids = array();
 
